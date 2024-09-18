@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"os"
 	"time"
+	"net/url"
 )
 
 type Book struct {
@@ -23,10 +24,12 @@ func main() {
 	// Replace with your API URL
 	//apiURL := "https://d.24hbook.store/search?query=+24hb&limit=20&offset=0"
 	apiURL := ""
+        queryKey := url.QueryEscape("儿童")
 	downURL := "https://b.24hbook.store/ipfs"
 
-	for i := 10000; i < 100000; i += 15 {
-		apiURL = fmt.Sprintf("https://d.24hbook.store/search?query=+24hb&limit=15&offset=%d", i)
+	for i := 0; i < 100; i += 15 {
+		apiURL = fmt.Sprintf("https://d.24hbook.store/search?query=+%s&limit=15&offset=%d",queryKey, i)
+		//fmt.Println(apiURL)
 		resp, err := http.Get(apiURL)
 		if err != nil {
 			fmt.Println("Error making request:", err)
